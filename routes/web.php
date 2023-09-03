@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +22,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    // Rute untuk CRUD pengguna
+    Route::resource('users', UserController::class);
+    Route::resource('vouchers', VoucherController::class);
+});
+
+
+
+

@@ -61,12 +61,8 @@
     <!-- Main -->
     <section class="section dashboard">
       <div class="row">
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
             @yield('content')
-          </div>
-        </div>
+      </div>
     </section>    
     </main>
     <!-- End main -->
@@ -98,6 +94,9 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('admin/assets/js/main.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     
 </body>
 

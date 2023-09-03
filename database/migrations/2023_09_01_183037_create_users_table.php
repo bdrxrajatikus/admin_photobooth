@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('image')->nullable();
             $table->string('password');
+            $table->string('remember_token')->nullable();
             $table->enum('level', ['admin', 'user'])->default('user');
             $table->timestamp('created_at')->useCurrent();
             $table->softDeletes();

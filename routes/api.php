@@ -1,19 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VoucherApiController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('vouchers')->group(function () {
+    Route::get('/', [VoucherApiController::class, 'index']);
+    Route::get('/{id}', [VoucherApiController::class, 'show']);
+    Route::post('/', [VoucherApiController::class, 'store']);
+    Route::put('/{id}', [VoucherApiController::class, 'update']);
+    Route::delete('/{id}', [VoucherApiController::class, 'destroy']);
 });

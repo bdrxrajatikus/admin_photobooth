@@ -12,9 +12,9 @@ class UsersTableSeeder extends Seeder
         // Menambahkan satu pengguna admin
         DB::table('users')->insert([
             'name' => 'Admin',
-            'email' => 'admin@example.com',
+            'email' => 'admin@gmail.com',
             'image' => 'admin.jpg',
-            'password' => Hash::make('adminpassword'),
+            'password' => Hash::make('admin'),
             'level' => 'admin',
             'created_at' => now(),
         ]);
