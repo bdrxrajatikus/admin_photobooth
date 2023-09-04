@@ -29,9 +29,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => ['required', 'string', 'min:6', 'confirmed'], // tambahkan 'password_confirmation' di form Anda
             'level' => 'required|in:admin,user',
-        ]);
+        ]);        
 
         $user = new User([
             'name' => $request->input('name'),
@@ -45,5 +45,35 @@ class UserController extends Controller
         return redirect('users')->with('success', 'User berhasil dibuat!');
     }
 
-    // Metode lainnya seperti edit, update, dan destroy dapat Anda tambahkan sesuai kebutuhan.
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $user->id, // mengecualikan email saat ini dari validasi unik
+            'password' => ['nullable', 'string', 'min:6', 'confirmed'], // tambahkan 'password_confirmation' di form Anda
+            'level' => 'required|in:admin,user',
+        ]);
+
+    // Update data pengguna
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'level' => $request->input('level'),
+        ]);
+
+    // Periksa apakah password diubah
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => Hash::make($request->input('password')),
+            ]);
+        }
+
+        return redirect('users')->with('success', 'User berhasil diperbarui!');
+    }
+
 }

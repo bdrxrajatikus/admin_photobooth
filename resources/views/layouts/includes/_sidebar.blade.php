@@ -16,6 +16,13 @@
     </a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link " href="/users">
+      <i class="ri-account-box-fill"></i>
+      <span>Account</span>
+    </a>
+  </li>
+
 </ul>
 
 </aside>
