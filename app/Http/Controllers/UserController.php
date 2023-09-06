@@ -29,7 +29,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => ['required', 'string', 'min:6', 'confirmed'], // tambahkan 'password_confirmation' di form Anda
+            'password' => ['required', 'string', 'min:6'], 
             'level' => 'required|in:admin,user',
         ]);        
 
@@ -55,7 +55,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $user->id, // mengecualikan email saat ini dari validasi unik
-            'password' => ['nullable', 'string', 'min:6', 'confirmed'], // tambahkan 'password_confirmation' di form Anda
+            'password' => ['nullable', 'string', 'min:6'], 
             'level' => 'required|in:admin,user',
         ]);
 

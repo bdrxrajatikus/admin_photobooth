@@ -10,7 +10,7 @@
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <h5 class="card-title">Data User</h5>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="bx bx-book-add"></i> Tambah Voucher
+                        <i class="bx ri-user-add-fill"></i> Tambah User
                     </button>
                 </div>
                 <!-- Table with stripped rows -->

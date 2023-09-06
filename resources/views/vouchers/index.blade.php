@@ -62,7 +62,7 @@
                                         <td>{{ $voucher->promo_code }}</td>
                                         <td>{{ $voucher->promo_name }}</td>
                                         <td>{{ $voucher->qty }}</td>
-                                        <td>{{ $voucher->amount }}</td>
+                                        <td>{{ $voucher->is_percentage ? $voucher->amount . '%' : number_format($voucher->amount, 2) }}</td>
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal({{ $voucher->id }}, '{{ $voucher->promo_code }}', '{{ $voucher->promo_name }}', '{{ $voucher->description }}', {{ $voucher->qty }}, {{ $voucher->is_percentage ? 'true' : 'false' }}, {{ $voucher->amount }})">Edit</button>
                                             <form action="{{ route('vouchers.destroy', $voucher->id) }}" method="POST" style="display: inline;">
