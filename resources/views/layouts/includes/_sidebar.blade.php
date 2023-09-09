@@ -17,6 +17,13 @@
   </li>
 
   <li class="nav-item">
+    <a class="nav-link " href="/templates">
+      <i class="bi bi-card-image"></i>
+      <span>Tamplates</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
     <a class="nav-link " href="/users">
       <i class="ri-account-box-fill"></i>
       <span>Account</span>

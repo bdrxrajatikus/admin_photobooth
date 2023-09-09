@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VoucherController;
-use App\Http\Controllers\TamplateController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     // Rute untuk CRUD pengguna
     Route::resource('users', UserController::class);
     Route::resource('vouchers', VoucherController::class);
-    Route::resource('tamplates', TamplateController::class);
+    Route::resource('templates', TemplateController::class);
 });
 
 
