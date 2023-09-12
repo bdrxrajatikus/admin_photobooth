@@ -13,68 +13,41 @@
                         <i class="bx bi-file-earmark-image-fill"></i> Tambah Template
                     </button>
                 </div>
-                <!-- Table with stripped rows -->
-                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                    <div class="datatable-top">
-                        <div class="datatable-dropdown">
-                            <label>
-                                <select class="datatable-selector">
-                                    <option value="5">5</option>
-                                    <option value="10" selected>10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
-                                    <option value="25">25</option>
-                                </select> entries per page
-                            </label>
-                        </div>
-                        <div class="datatable-search">
-                            <input id="searchInput" name="searchInput" class="form-control" placeholder="Search..." type="search" title="Search within table">
-                        </div>
-                    </div>
-                    <div class="datatable-container">
-                        <table id="templateTable" class="table datatable datatable-table">
-                            <thead>
-                                <tr>
-                                    <th data-sortable="true" aria-sort="ascending" class="datatable-ascending">
-                                        <a href="#" class="datatable-sorter">No</a>
-                                    </th>
-                                    <th data-sortable="true">
-                                        <a href="#" class="datatable-sorter">Name</a>
-                                    </th>
-                                    <th data-sortable="true">
-                                        <a href="#" class="datatable-sorter">Image</a>
-                                    </th>
-                                    <th data-sortable="true">
-                                        <a href="#" class="datatable-sorter">Action</a>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($templates as $index => $template)
-                                    <tr data-index="{{ $index }}">
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $template->name }}</td>
-                                        <td><img src="{{ asset('images/' . $template->image) }}" alt="{{ $template->name }}" width="100"></td>
-                                        <td>
-                                            <a href="{{ route('templates.edit', $template->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('templates.destroy', $template->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau dihapus ?')">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="datatable-bottom">
-                        <div class="datatable-info">Showing 1 to {{ count($templates) }} of {{ count($templates) }} entries</div>
-                        <nav class="datatable-pagination">
-                            <ul class="datatable-pagination-list"></ul>
-                        </nav>
-                    </div>
-                </div>
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th data-sortable="true" aria-sort="ascending" class="datatable-ascending">
+                                <a href="#" class="datatable-sorter">No</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Name</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Image</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Action</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($templates as $index => $template)
+                            <tr data-index="{{ $index }}">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $template->name }}</td>
+                                <td><img src="{{ asset('images/' . $template->image) }}" alt="{{ $template->name }}" width="100"></td>
+                                <td>
+                                    <a href="{{ route('templates.edit', $template->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('templates.destroy', $template->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau dihapus ?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 <!-- End Table with stripped rows -->
             </div>
         </div>

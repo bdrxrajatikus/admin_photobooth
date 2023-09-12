@@ -13,77 +13,47 @@
                         <i class="bx ri-user-add-fill"></i> Tambah User
                     </button>
                 </div>
-                <!-- Table with stripped rows -->
-                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                    <div class="datatable-top">
-                        <div class="datatable-dropdown">
-                            <label>
-                                <select class="datatable-selector">
-                                    <option value="5">5</option>
-                                    <option value="10" selected="">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
-                                    <option value="25">25</option>
-                                </select> entries per page
-                            </label>
-                        </div>
-                        <div class="datatable-search">
-                            <input id="searchInput" name="searchInput" class="datatable-input" placeholder="Search..." type="search" title="Search within table">
-                        </div>
-                    </div>
-                    <div class="datatable-container">
-                        <table id="userTable" class="table datatable datatable-table">
-                            <thead>
-                                <tr>
-                                    <th data-sortable="true" aria-sort="ascending" class="datatable-ascending">
-                                        <a href="#" class="datatable-sorter">No</a>
-                                    </th>
-                                    <th data-sortable="true">
-                                        <a href="#" class="datatable-sorter">Name</a>
-                                    </th>
-                                    <th data-sortable="true">
-                                        <a href="#" class="datatable-sorter">Email</a>
-                                    </th>
-                                    <th data-sortable="true">
-                                        <a href="#" class="datatable-sorter">Level</a>
-                                    </th>
-                                    <th data-sortable="true">
-                                        <a href="#" class="datatable-sorter">Action</a>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $index => $user)
-                                    <tr data-index="{{ $index }}">
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->level }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->level }}')">Edit</button>
-                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau dihapus ?')">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="datatable-bottom">
-                        <div class="datatable-info">Showing 1 to {{ count($users) }} of {{ count($users) }} entries</div>
-                        <nav class="datatable-pagination">
-                            <ul class="datatable-pagination-list"></ul>
-                        </nav>
-                    </div>
-                </div>
-                <!-- End Table with stripped rows -->
-
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th data-sortable="true" aria-sort="ascending" class="datatable-ascending">
+                                <a href="#" class="datatable-sorter">No</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Name</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Email</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Level</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Action</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $index => $user)
+                            <tr data-index="{{ $index }}">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->level }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->level }}')">Edit</button>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau dihapus ?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
 </section>
 

@@ -13,26 +13,7 @@
                         <i class="bx bx-book-add"></i> Tambah Voucher
                     </button>
                 </div>
-                <!-- Table with stripped rows -->
-                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                    <div class="datatable-top">
-                        <div class="datatable-dropdown">
-                            <label>
-                                <select class="datatable-selector">
-                                    <option value="5">5</option>
-                                    <option value="10" selected="">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
-                                    <option value="25">25</option>
-                                </select> entries per page
-                            </label>
-                        </div>
-                        <div class="datatable-search">
-                            <input id="searchInput" name="searchInput" class="datatable-input" placeholder="Search..." type="search" title="Search within table">
-                        </div>
-                    </div>
-                    <div class="datatable-container">
-                        <table id="voucherTable" class="table datatable datatable-table">
+                        <table  class="table datatable">
                             <thead>
                                 <tr>
                                     <th data-sortable="true" aria-sort="ascending" class="datatable-ascending">
@@ -76,15 +57,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="datatable-bottom">
-                        <div class="datatable-info">Showing 1 to {{ count($vouchers) }} of {{ count($vouchers) }} entries</div>
-                        <nav class="datatable-pagination">
-                            <ul class="datatable-pagination-list"></ul>
-                        </nav>
-                    </div>
-                </div>
-                <!-- End Table with stripped rows -->
-
                 </div>
             </div>
 
