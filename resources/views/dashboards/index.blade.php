@@ -1,7 +1,5 @@
 @extends('layouts.master')
 
-@section('content')
+@section('main') <!-- Mengubah 'content' menjadi 'main' -->
 
-<!-- <h1>RAHMI DWI ALYANI</h1> -->
-
-@stop
+@endsection
