@@ -10,7 +10,8 @@ class TemplateController extends Controller
     public function index()
     {
         $templates = Template::all();
-        return view('templates.index', ['templates' => $templates]);
+        $title = 'Template';
+        return view('templates.index', ['templates' => $templates, 'title' => $title]);
     }
 
     public function create()

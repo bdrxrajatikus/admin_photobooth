@@ -14,6 +14,7 @@ class DashboardController extends Controller
             'subtitle' => 'Welcome to the Dashboard',
         ];
     
-        return view('dashboards.index', compact('data'));
+        $title = 'Dashboard';
+        return view('dashboards.index', compact('data','title'));
     }
 }
