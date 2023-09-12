@@ -6,7 +6,8 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\SettingController;
+
 
 
 /*
@@ -29,13 +30,13 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/page/{pageName}', [PageController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     // Rute untuk CRUD pengguna
     Route::resource('users', UserController::class);
     Route::resource('vouchers', VoucherController::class);
     Route::resource('templates', TemplateController::class);
+    Route::resource('settings', SettingController::class);
 });
 
 

@@ -18,7 +18,7 @@ class VoucherController extends Controller
     public function create()
     {
         return view('vouchers.create');
-    }   
+    }
 
     public function store(Request $request)
     {
@@ -29,19 +29,23 @@ class VoucherController extends Controller
             'qty' => 'required|integer|min:1',
             'is_percentage' => 'required|boolean',
             'amount' => 'required|numeric|min:0.01',
+            'expired_date' => 'nullable|date',
         ];
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('vouchers/create')
+            return redirect()->route('vouchers.create')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        Voucher::create($request->all());
+        $voucherData = $request->except(['_token']);
+        $voucherData['expired_date'] = $request->input('expired_date');
 
-        return redirect('vouchers')->with('success', 'Voucher berhasil dibuat!');
+        Voucher::create($voucherData);
+
+        return redirect()->route('vouchers.index')->with('success', 'Voucher berhasil dibuat!');
     }
 
     public function edit($id)
@@ -59,20 +63,24 @@ class VoucherController extends Controller
             'qty' => 'required|integer|min:1',
             'is_percentage' => 'required|boolean',
             'amount' => 'required|numeric|min:0.01',
+            'expired_date' => 'nullable|date',
         ];
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('vouchers/' . $id . '/edit')
+            return redirect()->route('vouchers.edit', $id)
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $voucher = Voucher::findOrFail($id);
-        $voucher->update($request->all());
+        $voucherData = $request->except(['_token', '_method']);
+        $voucherData['expired_date'] = $request->input('expired_date');
 
-        return redirect('vouchers')->with('success', 'Voucher berhasil diperbarui!');
+        $voucher = Voucher::findOrFail($id);
+        $voucher->update($voucherData);
+
+        return redirect()->route('vouchers.index')->with('success', 'Voucher berhasil diperbarui!');
     }
 
     public function destroy($id)
@@ -80,6 +88,6 @@ class VoucherController extends Controller
         $voucher = Voucher::findOrFail($id);
         $voucher->delete();
 
-        return redirect('vouchers')->with('success', 'Voucher berhasil dihapus!');
+        return redirect()->route('vouchers.index')->with('success', 'Voucher berhasil dihapus!');
     }
 }

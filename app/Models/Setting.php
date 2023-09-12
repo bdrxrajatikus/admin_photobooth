@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     use HasFactory;
-    protected $table = 'settings';
-    protected $guarded = ['id'];
+
+    protected $fillable = ['application_name', 'master_price', 'homepage_image'];
 }
