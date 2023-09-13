@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <title>Login Dashboard Blured</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -82,9 +82,6 @@
                         <div class="col-12">
                             <button class="btn btn-primary w-100" type="submit">Login</button>
                         </div>
-                        <div class="col-12">
-                            <p class="small mb-0">Don't have an account? <a href="pages-register.html">Create an account</a></p>
-                        </div>
                     </form>
                     @if ($errors->any())
                         <div class="alert alert-danger mt-3">
@@ -103,7 +100,7 @@
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Designed by <a href="https://bootstrapmade.com/">rajatikus</a>
               </div>
 
             </div>

@@ -7,6 +7,8 @@ use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
+use App\Http\Middleware\CheckRole;
+
 
 
 
@@ -22,7 +24,7 @@ use App\Http\Controllers\SettingController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
@@ -31,14 +33,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
-
-    // Rute untuk CRUD pengguna
-    Route::resource('users', UserController::class);
     Route::resource('vouchers', VoucherController::class);
     Route::resource('templates', TemplateController::class);
     Route::resource('settings', SettingController::class);
+
+    // Rute CRUD pengguna hanya untuk admin
+    Route::middleware(['checkRole:admin'])->group(function () {
+        Route::resource('users', UserController::class);
+    });
 });
-
-
 
 
