@@ -122,7 +122,9 @@
         </div>
     </div>
 </div>
-
+@stop
+@section('footer')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Fungsi untuk menampilkan data template dalam modal edit
     function showEditModal(id, name, image) {
@@ -144,5 +146,4 @@
 }
 
 </script>
-
-@stop
+@endsection

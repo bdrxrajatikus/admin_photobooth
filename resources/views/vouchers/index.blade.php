@@ -199,7 +199,9 @@
         </div>
     </div>
 </div>
-
+@stop
+@section('footer')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Fungsi untuk menampilkan data voucher dalam modal edit
     function showEditModal(id, promo_code, promo_name, description, qty, is_percentage, amount, expired_date) {
@@ -241,5 +243,4 @@
         });
     });
 </script>
-
-@stop
+@endsection

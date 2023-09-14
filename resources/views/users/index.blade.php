@@ -67,7 +67,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form untuk menambahkan user -->
-                <form action="{{ route('users.store') }}" method="POST">
+                <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -87,6 +87,10 @@
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Profile Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
                     <!-- Tambahkan elemen formulir lainnya sesuai kebutuhan -->
 
@@ -111,7 +115,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form untuk mengedit user -->
-                <form id="editForm" method="POST">
+                <form id="editForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT') <!-- Gunakan metode PUT untuk mengirimkan perubahan -->
                     <div class="mb-3">
@@ -133,6 +137,10 @@
                             <option value="user">User</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Profile Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                    </div>
                     <!-- Tambahkan elemen formulir lainnya sesuai kebutuhan -->
 
                     <!-- Akhir Form -->
@@ -145,17 +153,19 @@
         </div>
     </div>
 </div>
-
+@stop
+@section('footer')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Fungsi untuk menampilkan data user dalam modal edit
-    function showEditModal(id, name, email, level) {
+    function showEditModal(id, name, email, level, image) {
         $('#editModal').modal('show'); // Tampilkan modal edit
         // Isi data user ke dalam formulir edit
         $('#editForm').attr('action', '/users/' + id); // Set action form sesuai dengan rute edit
         $('#edit_name').val(name);
         $('#edit_email').val(email);
         $('#edit_level').val(level);
+        $('#edit_image').val(image);
     }
 </script>
-
-@stop
+@endsection

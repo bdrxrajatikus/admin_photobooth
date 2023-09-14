@@ -144,7 +144,9 @@
         </div>
     </div>
 </div>
-
+@stop
+@section('footer')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Fungsi untuk menampilkan data setting dalam modal edit
     function showEditModal(id, application_name, master_price, homepage_image) {
@@ -162,7 +164,6 @@
         }
     }
 </script>
-
 <script>
     $(document).ready(function () {
         var table = $('.datatable').DataTable({
@@ -188,4 +189,4 @@
         });
     });
 </script>
-@stop
+@endsection

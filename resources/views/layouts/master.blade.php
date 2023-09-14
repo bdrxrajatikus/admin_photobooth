@@ -51,7 +51,7 @@
       <h1>{{$title}}</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
           <li class="breadcrumb-item active">{{$title}}</li>
         </ol>
       </nav>
@@ -68,7 +68,7 @@
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>BlueRed</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
@@ -93,7 +93,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('admin/assets/js/main.js')}}"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  @yield('footer')
 
 
     

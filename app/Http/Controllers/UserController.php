@@ -30,19 +30,26 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => ['required', 'string', 'min:6'], 
+            'password' => ['required', 'string', 'min:6'],
             'level' => 'required|in:admin,user',
-        ]);        
-
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Menambahkan validasi untuk file gambar
+        ]);
+    
         $user = new User([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'level' => $request->input('level'),
         ]);
-
+    
+        // Mengelola unggahan gambar profil
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profile_images', 'public');
+            $user->image = $imagePath;
+        }
+    
         $user->save();
-
+    
         return redirect('users')->with('success', 'User berhasil dibuat!');
     }
 
@@ -55,25 +62,35 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $user->id, // mengecualikan email saat ini dari validasi unik
-            'password' => ['nullable', 'string', 'min:6'], 
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'level' => 'required|in:admin,user',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Menambahkan validasi untuk file gambar
         ]);
-
-    // Update data pengguna
+    
         $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'level' => $request->input('level'),
         ]);
-
-    // Periksa apakah password diubah
+    
+        // Mengelola unggahan gambar profil
+        if ($request->hasFile('image')) {
+            // Menghapus gambar profil lama jika ada
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+            }
+    
+            $imagePath = $request->file('image')->store('profile_images', 'public');
+            $user->image = $imagePath;
+        }
+    
+        // Periksa apakah password diubah
         if ($request->filled('password')) {
             $user->update([
                 'password' => Hash::make($request->input('password')),
             ]);
         }
-
+    
         return redirect('users')->with('success', 'User berhasil diperbarui!');
     }
 
