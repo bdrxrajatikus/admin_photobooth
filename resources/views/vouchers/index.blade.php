@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
-<section class="section">
     <div class="row">
         <div class="col-lg-12">
 
@@ -66,7 +64,6 @@
             </div>
         </div>
     </div>
-</section>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

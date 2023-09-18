@@ -34,6 +34,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboards', [DashboardController::class, 'index']);
     Route::get('/getTotalVoucher', [DashboardController::class, 'getTotalVoucher']);
+    Route::get('/getTotalRevenue', [DashboardController::class, 'getTotalRevenue']);
     Route::resource('vouchers', VoucherController::class);
     Route::resource('templates', TemplateController::class);
     Route::resource('settings', SettingController::class);
