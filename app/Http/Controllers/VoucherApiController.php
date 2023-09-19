@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -47,6 +48,7 @@ class VoucherApiController extends Controller
             'qty' => 'required|integer|min:1',
             'is_percentage' => 'required|boolean',
             'amount' => 'required|numeric|min:0.01',
+            'expired_date' => 'nullable|date',
         ]);
 
         if ($validator->fails()) {
@@ -75,6 +77,7 @@ class VoucherApiController extends Controller
             'qty' => 'required|integer|min:1',
             'is_percentage' => 'required|boolean',
             'amount' => 'required|numeric|min:0.01',
+            'expired_date' => 'nullable|date',
         ]);
 
         if ($validator->fails()) {

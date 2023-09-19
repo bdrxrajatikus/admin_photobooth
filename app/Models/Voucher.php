@@ -10,6 +10,7 @@ class Voucher extends Model
     use HasFactory;
     protected $table = 'vouchers';
     protected $guarded = ['id'];
+    protected $dates = ['expired_date']; // Tambahkan kolom tanggal ke model
 
     public function incrementUsage($incrementBy = 1)
     {

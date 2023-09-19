@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>{{ $title }} - Bluered</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,7 +28,6 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet">
-
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Jul 27 2023 with Bootstrap v5.3.1
@@ -52,7 +51,7 @@
       <h1>{{$title}}</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
           <li class="breadcrumb-item active">{{$title}}</li>
         </ol>
       </nav>
@@ -69,7 +68,7 @@
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>BlueRed</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
@@ -94,6 +93,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('admin/assets/js/main.js')}}"></script>
+  @yield('footer')
 
 
     

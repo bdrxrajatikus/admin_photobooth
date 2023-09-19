@@ -37,7 +37,7 @@
                                 <td>{{ $template->name }}</td>
                                 <td><img src="{{ asset('images/' . $template->image) }}" alt="{{ $template->name }}" width="100"></td>
                                 <td>
-                                    <a href="{{ route('templates.edit', $template->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal('{{ $template->id }}', '{{ $template->name }}', '{{ $template->image }}')">Edit</button>
                                     <form action="{{ route('templates.destroy', $template->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -108,6 +108,10 @@
                         <label for="edit_image" class="form-label">Image</label>
                         <input type="file" class="form-control" id="edit_image" name="image">
                     </div>
+                    <div class="mb-3">
+                        <label for="edit_image_preview" class="form-label">Current Image</label>
+                        <img src="" alt="Current Image" id="edit_image_preview" style="max-width: 100px;">
+                    </div>
                     <!-- Akhir Form -->
                 </div>
                 <div class="modal-footer">
@@ -118,19 +122,28 @@
         </div>
     </div>
 </div>
-
+@stop
+@section('footer')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Fungsi untuk menampilkan data template dalam modal edit
     function showEditModal(id, name, image) {
-        $('#editModal').modal('show'); // Tampilkan modal edit
-        // Isi data template ke dalam formulir edit
-        $('#editForm').attr('action', '/templates/' + id); // Set action form sesuai dengan rute edit
-        $('#edit_name').val(name);
-        // Tampilkan gambar template yang ada
-        var imageUrl = "{{ asset('images/') }}" + '/' + image;
-        $('#edit_image').val(''); // Reset input gambar
-        $('#edit_image_preview').attr('src', imageUrl);
-    }
-</script>
+    $('#editModal').modal('show'); // Tampilkan modal edit
+    // Isi data template ke dalam formulir edit
+    $('#editForm').attr('action', '/templates/' + id); // Set action form sesuai dengan rute edit
+    $('#edit_name').val(name);
 
-@stop
+    // Tampilkan gambar template yang ada
+    var imageUrl = "{{ asset('images/') }}" + '/' + image;
+    $('#edit_image_preview').attr('src', imageUrl);
+
+    // Inisialisasi input gambar saat modal edit ditampilkan
+    $('#edit_image').change(function () {
+        var input = this;
+        var url = URL.createObjectURL(input.files[0]);
+        $('#edit_image_preview').attr('src', url);
+    });
+}
+
+</script>
+@endsection

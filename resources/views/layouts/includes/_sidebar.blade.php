@@ -3,18 +3,29 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
   <li class="nav-item">
-    <a class="nav-link " href="/dashboard">
+    <a class="nav-link " href="/dashboards">
       <i class="bi bi-grid"></i>
       <span>Dashboard</span>
     </a>
   </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a class="nav-link " href="/vouchers">
-      <i class="bi bi-card-checklist"></i>
-      <span>Vouchers</span>
-    </a>
-  </li>
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="ri ri-money-dollar-box-line"></i><span>Harga</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>  
+            <a href="/settings">
+              <i class="bi bi-circle"></i><span>Master Harga</span>
+            </a>
+          </li>
+          <li>
+            <a href="/vouchers">
+              <i class="bi bi-circle"></i><span>Vouchers</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
 
   <li class="nav-item">
     <a class="nav-link " href="/templates">
@@ -23,12 +34,15 @@
     </a>
   </li>
 
+  @if (Auth::check() && Auth::user()->level == 'admin')
+  <!-- Tampilkan menu "Account" hanya untuk admin -->
   <li class="nav-item">
-    <a class="nav-link " href="/users">
-      <i class="ri-account-box-fill"></i>
-      <span>Account</span>
-    </a>
+      <a class="nav-link" href="{{ route('users.index') }}">
+          <i class="ri-account-box-fill"></i>
+          <span>Account</span>
+      </a>
   </li>
+  @endif
 
 </ul>
 

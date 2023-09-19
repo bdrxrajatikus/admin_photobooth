@@ -15,6 +15,7 @@ class CreateVouchersTable extends Migration
             $table->text('description')->nullable();
             $table->integer('qty');
             $table->boolean('is_percentage');
+            $table->date('expired_date')->nullable();
             $table->decimal('amount', 10, 2);
             $table->integer('usage')->default(0);
             $table->timestamps();
