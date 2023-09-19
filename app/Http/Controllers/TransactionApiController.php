@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class TransactionApiController extends Controller
@@ -30,13 +31,18 @@ class TransactionApiController extends Controller
             'transaction_date' => 'required|date',
             'phone_number' => 'required|string',
             'price' => 'required|numeric',
-            'promo_code_id' => 'nullable|numeric',
+            'promo_code_id' => 'nullable|numeric|string',
             'final_price' => 'required|numeric',
-            'status' => 'required|in:success,pending,failed',
+            'status' => 'required|in:settlement,success,pending,failed',
         ]);
 
         $transaction = Transaction::create($request->all());
 
+        if($request->promo_code_id && $request->promo_code_id != "null") { 
+            $voucher = Voucher::where('id', $request->promo_code_id)->first();
+
+            $voucher->incrementUsage();
+        }
         return response()->json($transaction, 201);
     }
 
@@ -58,6 +64,7 @@ class TransactionApiController extends Controller
         ]);
 
         $transaction->update($request->all());
+
 
         return response()->json($transaction, 200);
     }

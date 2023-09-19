@@ -29,7 +29,7 @@
                             <td>{{ $setting->master_price }}</td>
                             <td>
                                 @if ($setting->homepage_image)
-                                <img src="{{ asset('storage/' . $setting->homepage_image) }}" alt="Homepage Image" width="100">
+                                <img src="{{ asset('images/' . $setting->homepage_image) }}" alt="Homepage Image" width="100">
                                 @else
                                 No Image
                                 @endif

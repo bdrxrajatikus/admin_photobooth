@@ -29,12 +29,11 @@ class VoucherApiController extends Controller
     public function checkPromoCode($code)
     {
         $voucher = Voucher::where('promo_code', $code)->first();
-
+        
         if (!$voucher) {
             return response()->json(['message' => 'Voucher Tidak Ditemukan', "success"=> false], Response::HTTP_NOT_FOUND);
         }
         $response = ["data" => $voucher, "success" => true];
-        $voucher->incrementUsage();
         return response()->json($response, Response::HTTP_OK);
     }
 

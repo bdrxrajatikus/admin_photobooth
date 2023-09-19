@@ -31,7 +31,7 @@ class SettingController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
 
             // Simpan gambar menggunakan Storage
-            $path = $image->storeAs('public/images', $imageName);
+            $image->move(public_path('images'), $imageName);
             $data['homepage_image'] = $path;
         }
 
@@ -62,8 +62,8 @@ class SettingController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
 
             // Simpan gambar menggunakan Storage
-            $path = $image->storeAs('public/images', $imageName);
-            $data['homepage_image'] = $path;
+            $image->move(public_path('images'), $imageName);
+            $data['homepage_image'] = $imageName;
         }
 
         $setting->update($data);
