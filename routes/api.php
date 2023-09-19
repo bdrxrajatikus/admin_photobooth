@@ -7,7 +7,7 @@ use App\Http\Controllers\TransactionApiController;
 Route::prefix('vouchers')->group(function () {
     Route::get('/', [VoucherApiController::class, 'index']);
     Route::get('/{id}', [VoucherApiController::class, 'show']);
-    Route::post('/', [VoucherApiController::class, 'store']);
+    Route::get('/check/{code}', [VoucherApiController::class, 'checkPromoCode']);
     Route::put('/{id}', [VoucherApiController::class, 'update']);
     Route::delete('/{id}', [VoucherApiController::class, 'destroy']);
 });
