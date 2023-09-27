@@ -39,10 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('templates', TemplateController::class);
     Route::resource('settings', SettingController::class);
 
-    // Rute CRUD pengguna hanya untuk admin
-    Route::middleware(['checkRole:admin'])->group(function () {
-        Route::resource('users', UserController::class);
-    });
+    Route::resource('users', UserController::class)->middleware('checkRole:admin');
 });
 
 

@@ -39,6 +39,14 @@
 </head>
 
 <body>
+  @if (session('timeout'))
+      <div class="alert alert-warning">
+          {{ session('timeout') }}
+      </div>
+  @endif
+
+<!-- Form login Anda -->
+
 
   <main>
     <div class="container">

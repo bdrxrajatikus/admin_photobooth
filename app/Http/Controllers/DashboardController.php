@@ -15,13 +15,14 @@ class DashboardController extends Controller
         $totalVoucher = Voucher::count();
         
         // Inisialisasi totalRevenue dengan nilai awal 0
-        $totalRevenue = 0;
+        $totalRevenue = Transaction::sum('final_price');
+    
     
         $data = [
             'title' => 'Dashboard',
             'subtitle' => 'Welcome to the Dashboard',
             'totalVoucher' => $totalVoucher,
-            'totalRevenue' => $totalRevenue, // Tambahkan ini
+            'totalRevenue' => $totalRevenue,
         ];
     
         $title = 'Dashboard';

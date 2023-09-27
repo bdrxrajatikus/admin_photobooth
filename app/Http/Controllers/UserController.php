@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class UserController extends Controller
@@ -32,7 +33,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => ['required', 'string', 'min:6'],
             'level' => 'required|in:admin,user',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Menambahkan validasi untuk file gambar
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
         $user = new User([
@@ -42,10 +43,14 @@ class UserController extends Controller
             'level' => $request->input('level'),
         ]);
     
-        // Mengelola unggahan gambar profil
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('profile_images', 'public');
-            $user->image = $imagePath;
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images_profile'), $imageName);
+            $user->image = 'images_profile/' . $imageName;
+        } else {
+            // Jika pengguna tidak mengunggah gambar, gunakan nilai default
+            $user->image = 'images_profile/default.jpg';
         }
     
         $user->save();
@@ -64,7 +69,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'level' => 'required|in:admin,user',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Menambahkan validasi untuk file gambar
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
         $user->update([
@@ -73,15 +78,16 @@ class UserController extends Controller
             'level' => $request->input('level'),
         ]);
     
-        // Mengelola unggahan gambar profil
         if ($request->hasFile('image')) {
             // Menghapus gambar profil lama jika ada
-            if ($user->image) {
-                Storage::disk('public')->delete($user->image);
+            if ($user->image && $user->image !== 'images_profile/default.jpg') {
+                Storage::delete('public/' . $user->image);
             }
     
-            $imagePath = $request->file('image')->store('profile_images', 'public');
-            $user->image = $imagePath;
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images_profile'), $imageName);
+            $user->image = 'images_profile/' . $imageName;
         }
     
         // Periksa apakah password diubah
@@ -90,6 +96,8 @@ class UserController extends Controller
                 'password' => Hash::make($request->input('password')),
             ]);
         }
+    
+        $user->save();
     
         return redirect('users')->with('success', 'User berhasil diperbarui!');
     }

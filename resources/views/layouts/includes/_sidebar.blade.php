@@ -34,15 +34,16 @@
     </a>
   </li>
 
-  @if (Auth::check() && Auth::user()->level == 'admin')
   <!-- Tampilkan menu "Account" hanya untuk admin -->
+  @if (Auth::check() && Auth::user()->level == 'admin')
   <li class="nav-item">
-      <a class="nav-link" href="{{ route('users.index') }}">
+      <a class="nav-link @if (request()->is('users*')) active @endif" href="{{ route('users.index') }}">
           <i class="ri-account-box-fill"></i>
           <span>Account</span>
       </a>
   </li>
   @endif
+
 
 </ul>
 
