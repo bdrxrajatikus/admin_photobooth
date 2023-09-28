@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="section">
+
     <div class="row">
         <div class="col-lg-12">
 
@@ -45,7 +45,7 @@
                                 <td>{{ $user->level }}</td>
                                 <td><img src="{{ asset($user->image) }}" alt="{{ $user->name }}" width="35"></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->level }}')">Edit</button>
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->level }}', '{{ asset($user->image) }}')">Edit</button>
                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -158,7 +158,6 @@
             </div>
         </div>
     </div>
-</div>
 @stop
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

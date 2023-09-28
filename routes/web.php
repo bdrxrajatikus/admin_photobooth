@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('vouchers', VoucherController::class);
     Route::resource('templates', TemplateController::class);
     Route::resource('settings', SettingController::class);
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile/{user}', 'UserController@updateProfile')->name('profile.update');
 
     Route::resource('users', UserController::class)->middleware('checkRole:admin');
 });
