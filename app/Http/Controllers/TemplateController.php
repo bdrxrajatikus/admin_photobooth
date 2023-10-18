@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Template;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TemplateController extends Controller
 {
@@ -23,18 +24,26 @@ class TemplateController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'type' => [
+                'required',
+                'in:payment,how_to_use,contact,frame',
+                Rule::unique('templates', 'type'),
+            ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        $template = new Template();
-        $template->name = $request->input('name');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName);
-            $template->image = $imageName;
+        } else {
+            $imageName = null;
         }
+
+        $template = new Template();
+        $template->name = $request->input('name');
+        $template->type = $request->input('type');
+        $template->image = $imageName;
 
         $template->save();
 
@@ -62,11 +71,16 @@ class TemplateController extends Controller
 
         $request->validate([
             'name' => 'required|string',
+            'type' => [
+                'required',
+                'in:payment,how_to_use,contact,frame',
+                Rule::unique('templates', 'type')->ignore($template->id),
+            ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $template->name = $request->input('name');
-
+        
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -81,12 +95,7 @@ class TemplateController extends Controller
 
     public function destroy($id)
     {
-        $template = Template::find($id);
-
-        if (!$template) {
-            return redirect()->route('templates.index')->with('error', 'Template not found');
-        }
-
+        $template = Template::findOrfail($id);
         $template->delete();
 
         return redirect()->route('templates.index')->with('success', 'Template deleted successfully');

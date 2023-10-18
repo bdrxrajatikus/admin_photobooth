@@ -23,6 +23,9 @@
                                 <a href="#" class="datatable-sorter">Name</a>
                             </th>
                             <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Type</a>
+                            </th>
+                            <th data-sortable="true">
                                 <a href="#" class="datatable-sorter">Image</a>
                             </th>
                             <th data-sortable="true">
@@ -35,6 +38,7 @@
                             <tr data-index="{{ $index }}">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $template->name }}</td>
+                                <td>{{ ucfirst(str_replace('_', ' ', $template->type)) }}</td>
                                 <td><img src="{{ asset('images/' . $template->image) }}" alt="{{ $template->name }}" width="100"></td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal('{{ $template->id }}', '{{ $template->name }}', '{{ $template->image }}')">Edit</button>
@@ -72,6 +76,15 @@
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                        <select class="form-control" id="type" name="type" required>
+                            <option value="payment">Payment</option>
+                            <option value="how_to_use">How to use</option>
+                            <option value="contact">Contact</option>
+                            <option value="frame">Frame</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" id="image" name="image">
                     </div>
@@ -103,6 +116,15 @@
                     <div class="mb-3">
                         <label for="edit_name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="edit_name" name="name" required>
+                    </div>\
+                    <div class="mb-3">
+                        <label for="edit_type" class="form-label">Type</label>
+                        <select class="form-control" id="edit_type" name="type" required>
+                            <option value="payment">Payment</option>
+                            <option value="how_to_use">How to use</option>
+                            <option value="contact">Contact</option>
+                            <option value="frame">Frame</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="edit_image" class="form-label">Image</label>
@@ -132,6 +154,7 @@
     // Isi data template ke dalam formulir edit
     $('#editForm').attr('action', '/templates/' + id); // Set action form sesuai dengan rute edit
     $('#edit_name').val(name);
+    $('$edit_type').val(name);
 
     // Tampilkan gambar template yang ada
     var imageUrl = "{{ asset('images/') }}" + '/' + image;

@@ -10,6 +10,7 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('settings_id')->nullable();
             $table->string('promo_code')->unique();
             $table->string('promo_name');
             $table->text('description')->nullable();
@@ -19,6 +20,8 @@ class CreateVouchersTable extends Migration
             $table->decimal('amount', 10, 2);
             $table->integer('usage')->default(0);
             $table->timestamps();
+
+            $table->foreign('settings_id')->references('id')->on('settings');
         });
     }
 

@@ -12,6 +12,7 @@ class Template extends Model
 
     protected $fillable = [
         'name',
+        'type',
         'image',
     ];
 

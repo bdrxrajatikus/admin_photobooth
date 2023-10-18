@@ -11,6 +11,7 @@ class CreateTemplatesTable extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('type',['payment','how_to_use','contact','frame']);
             $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();

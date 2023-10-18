@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 
 class TemplateApiController extends Controller
 {
@@ -29,11 +30,14 @@ class TemplateApiController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'type' => [
+                'required',
+                'in:payment,how_to_use,contact,frame',
+                Rule::unique('templates', 'type'),
+            ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $template = new Template();
-        $template->name = $request->input('name');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -41,6 +45,11 @@ class TemplateApiController extends Controller
             $image->move(public_path('images'), $imageName);
             $template->image = $imageName;
         }
+
+        $template = new Template();
+        $template->name = $request->input('name');
+        $template->type = $request->input('type');
+        $template->image = $imageName;
 
         $template->save();
 
@@ -57,10 +66,14 @@ class TemplateApiController extends Controller
 
         $request->validate([
             'name' => 'required|string',
+            'type' => [
+                'required',
+                'in:payment,how_to_use,contact,frame',
+                Rule::unique('templates', 'type'),
+            ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $template->name = $request->input('name');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -69,6 +82,9 @@ class TemplateApiController extends Controller
             $template->image = $imageName;
         }
 
+        $template->name = $request->input('name');
+        $template->type = $request->input('type');
+        $template->image = $imageName;
         $template->save();
 
         return response()->json(['message' => 'Template updated successfully'], Response::HTTP_OK);

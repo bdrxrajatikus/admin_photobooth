@@ -30,6 +30,7 @@ class VoucherApiController extends Controller
     {
         // Validasi data
         $validator = Validator::make($request->all(), [
+            'settings_id' => 'nullable|integer',
             'promo_code' => 'required|unique:vouchers,promo_code',
             'promo_name' => 'required',
             'description' => 'nullable',
@@ -59,6 +60,7 @@ class VoucherApiController extends Controller
 
         // Validasi data
         $validator = Validator::make($request->all(), [
+            'settings_id' => 'nullable|integer',
             'promo_code' => 'required|unique:vouchers,promo_code,' . $id,
             'promo_name' => 'required',
             'description' => 'nullable',

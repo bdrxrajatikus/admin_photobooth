@@ -11,7 +11,7 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::all();
-        $title = 'Master Harga';
+        $title = 'Master Photobooth';
         return view('settings.index', compact('settings', 'title'));
     }
 

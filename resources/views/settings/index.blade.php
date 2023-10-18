@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Master Harga</h5>
+                    <h5 class="card-title">Master Photobooth</h5>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i class="bx bx-book-add"></i> Tambah Harga
                     </button>
