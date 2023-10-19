@@ -12,8 +12,14 @@ class Template extends Model
 
     protected $fillable = [
         'name',
+        'type',
         'image',
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function setting()
+    {
+        return $this->belongsTo(Setting::class, 'settings_id');
+    }
 }

@@ -20,7 +20,13 @@
                                 <a href="#" class="datatable-sorter">No</a>
                             </th>
                             <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">For Photobooth</a>
+                            </th>
+                            <th data-sortable="true">
                                 <a href="#" class="datatable-sorter">Name</a>
+                            </th>
+                            <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Type</a>
                             </th>
                             <th data-sortable="true">
                                 <a href="#" class="datatable-sorter">Image</a>
@@ -34,7 +40,9 @@
                         @foreach ($templates as $index => $template)
                             <tr data-index="{{ $index }}">
                                 <td>{{ $index + 1 }}</td>
+                                <td>{{ $template->photobooth_name }}</td>
                                 <td>{{ $template->name }}</td>
+                                <td>{{ ucfirst(str_replace('_', ' ', $template->type)) }}</td>
                                 <td><img src="{{ asset('images/' . $template->image) }}" alt="{{ $template->name }}" width="100"></td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal('{{ $template->id }}', '{{ $template->name }}', '{{ $template->image }}')">Edit</button>
@@ -72,8 +80,25 @@
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                        <select class="form-control" id="type" name="type" required>
+                            <option value="payment">Payment</option>
+                            <option value="how_to_use">How to use</option>
+                            <option value="contact">Contact</option>
+                            <option value="frame">Frame</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" id="image" name="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="settings_id" class="form-label">Photobooth Name</label>
+                        <select class="form-control" id="settings_id" name="settings_id">
+                            @foreach ($settings as $setting)
+                            <option value="{{ $setting->id }}">{{ $setting->application_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <!-- Akhir Form -->
                 </div>
@@ -103,6 +128,15 @@
                     <div class="mb-3">
                         <label for="edit_name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="edit_name" name="name" required>
+                    </div>\
+                    <div class="mb-3">
+                        <label for="edit_type" class="form-label">Type</label>
+                        <select class="form-control" id="edit_type" name="type" required>
+                            <option value="payment">Payment</option>
+                            <option value="how_to_use">How to use</option>
+                            <option value="contact">Contact</option>
+                            <option value="frame">Frame</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="edit_image" class="form-label">Image</label>
@@ -111,6 +145,15 @@
                     <div class="mb-3">
                         <label for="edit_image_preview" class="form-label">Current Image</label>
                         <img src="" alt="Current Image" id="edit_image_preview" style="max-width: 100px;">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_settings_id" class="form-label">Photobooth Name</label>
+                        <select class="form-control" id="edit_settings_id" name="settings_id">
+                            <option value="">All</option>
+                            @foreach ($settings as $setting)
+                            <option value="{{ $setting->id }}">{{ $setting->application_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <!-- Akhir Form -->
                 </div>
@@ -132,6 +175,7 @@
     // Isi data template ke dalam formulir edit
     $('#editForm').attr('action', '/templates/' + id); // Set action form sesuai dengan rute edit
     $('#edit_name').val(name);
+    $('$edit_type').val(name);
 
     // Tampilkan gambar template yang ada
     var imageUrl = "{{ asset('images/') }}" + '/' + image;

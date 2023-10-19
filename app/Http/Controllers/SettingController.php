@@ -11,7 +11,7 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::all();
-        $title = 'Master Harga';
+        $title = 'Master Photobooth';
         return view('settings.index', compact('settings', 'title'));
     }
 
@@ -32,7 +32,7 @@ class SettingController extends Controller
 
             // Simpan gambar menggunakan Storage
             $image->move(public_path('images'), $imageName);
-            $data['homepage_image'] = $path;
+            $data['homepage_image'] = $imageName;
         }
 
         Setting::create($data);

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Setting;
 
 class Voucher extends Model
 {
@@ -16,5 +17,10 @@ class Voucher extends Model
     {
         $this->usage += $incrementBy;
         return $this->save();
+    }
+    
+    public function setting()
+    {
+        return $this->belongsTo(Setting::class, 'settings_id');
     }
 }

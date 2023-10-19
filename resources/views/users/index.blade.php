@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="section">
+
     <div class="row">
         <div class="col-lg-12">
 
@@ -29,6 +29,9 @@
                                 <a href="#" class="datatable-sorter">Level</a>
                             </th>
                             <th data-sortable="true">
+                                <a href="#" class="datatable-sorter">Image</a>
+                            </th>
+                            <th data-sortable="true">
                                 <a href="#" class="datatable-sorter">Action</a>
                             </th>
                         </tr>
@@ -40,8 +43,9 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->level }}</td>
+                                <td><img src="{{ asset($user->image) }}" alt="{{ $user->name }}" width="35"></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->level }}')">Edit</button>
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->level }}', '{{ asset($user->image) }}')">Edit</button>
                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -139,7 +143,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Profile Image</label>
-                        <input type="file" class="form-control" id="image" name="image">
+                        <input type="file" class="form-control" id="edit_image" name="image">
+                        <!-- Preview gambar profil -->
+                        <img id="edit_image_preview" src="" alt="Profile Image" width="100">
                     </div>
                     <!-- Tambahkan elemen formulir lainnya sesuai kebutuhan -->
 
@@ -152,12 +158,11 @@
             </div>
         </div>
     </div>
-</div>
 @stop
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Fungsi untuk menampilkan data user dalam modal edit
+// Fungsi untuk menampilkan data user dalam modal edit
     function showEditModal(id, name, email, level, image) {
         $('#editModal').modal('show'); // Tampilkan modal edit
         // Isi data user ke dalam formulir edit
@@ -165,7 +170,9 @@
         $('#edit_name').val(name);
         $('#edit_email').val(email);
         $('#edit_level').val(level);
-        $('#edit_image').val(image);
+        // Tambahkan kode berikut untuk menampilkan gambar profil yang sesuai
+        $('#edit_image_preview').attr('src', '{{ asset('') }}' + image);
+        $('#edit_image').val(image); // Set nilai input tersembunyi untuk gambar profil
     }
 </script>
 @endsection

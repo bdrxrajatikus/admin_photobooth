@@ -38,11 +38,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('vouchers', VoucherController::class);
     Route::resource('templates', TemplateController::class);
     Route::resource('settings', SettingController::class);
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile/{user}', 'UserController@updateProfile')->name('profile.update');
 
-    // Rute CRUD pengguna hanya untuk admin
-    Route::middleware(['checkRole:admin'])->group(function () {
-        Route::resource('users', UserController::class);
-    });
+    Route::resource('users', UserController::class)->middleware('checkRole:admin');
 });
 
 

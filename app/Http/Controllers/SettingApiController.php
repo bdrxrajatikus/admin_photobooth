@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
@@ -23,7 +24,16 @@ class SettingApiController extends Controller
             return response()->json(['message' => 'Setting not found'], Response::HTTP_NOT_FOUND);
         }
 
-        return response()->json($setting, Response::HTTP_OK);
+        $templates = Template::where('settings_id', $id)->get();
+        return response()->json([
+            'id' => $setting->id,
+            'application_name' => $setting->application_name,
+            'master_price' => $setting->master_price,
+            'homepage_image' => $setting->homepage_image,
+            'created_at' => $setting->created_at,
+            'updated_at' => $setting->updated_at,
+            'templates' => $templates
+        ], Response::HTTP_OK);
     }
 
     public function store(Request $request)
