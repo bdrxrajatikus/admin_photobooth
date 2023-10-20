@@ -41,7 +41,7 @@
                                 <td>{{ ucfirst(str_replace('_', ' ', $template->type)) }}</td>
                                 <td><img src="{{ asset('images/' . $template->image) }}" alt="{{ $template->name }}" width="100"></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal('{{ $template->id }}', '{{ $template->name }}', '{{ $template->image }}')">Edit</button>
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="showEditModal('{{ $template->id }}', '{{ $template->name }}', '{{$template->type}}', '{{ $template->image }}')">Edit</button>
                                     <form action="{{ route('templates.destroy', $template->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -116,7 +116,7 @@
                     <div class="mb-3">
                         <label for="edit_name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="edit_name" name="name" required>
-                    </div>\
+                    </div>
                     <div class="mb-3">
                         <label for="edit_type" class="form-label">Type</label>
                         <select class="form-control" id="edit_type" name="type" required>
@@ -149,12 +149,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Fungsi untuk menampilkan data template dalam modal edit
-    function showEditModal(id, name, image) {
+    function showEditModal(id, name, type, image) {
     $('#editModal').modal('show'); // Tampilkan modal edit
     // Isi data template ke dalam formulir edit
     $('#editForm').attr('action', '/templates/' + id); // Set action form sesuai dengan rute edit
     $('#edit_name').val(name);
-    $('$edit_type').val(name);
+    $('#edit_type').val(type);
 
     // Tampilkan gambar template yang ada
     var imageUrl = "{{ asset('images/') }}" + '/' + image;

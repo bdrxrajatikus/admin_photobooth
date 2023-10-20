@@ -80,7 +80,7 @@ class VoucherController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()->route('vouchers.edit', $id)
+            return redirect()->route('vouchers.index', $id)
                 ->withErrors($validator)
                 ->withInput();
         }

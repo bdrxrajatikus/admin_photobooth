@@ -50,7 +50,7 @@
                         <td>{{ $voucher->expired_date }}</td>
                         <td>
                             <button type="button" class="btn btn-warning btn-sm"
-                                onclick="showEditModal({{ $voucher->id }}, '{{ $voucher->promo_code }}', '{{ $voucher->promo_name }}', '{{ $voucher->description }}', {{ $voucher->qty }}, {{ $voucher->is_percentage ? 'true' : 'false' }}, {{ $voucher->amount }}, '{{ $voucher->expired_date }}')">
+                                onclick="showEditModal('{{ $voucher->id }}', '{{ $voucher->promo_code }}', '{{ $voucher->promo_name }}', '{{ $voucher->description }}', '{{ $voucher->qty }}', '{{ $voucher->is_percentage }}', '{{ $voucher->amount }}', '{{ $voucher->expired_date }}', '{{ $voucher->settings_id }}')">
                                 Edit
                             </button>
                             <form action="{{ route('vouchers.destroy', $voucher->id) }}" method="POST"
@@ -225,10 +225,10 @@
         $('#edit_promo_name').val(promo_name);
         $('#edit_description').val(description);
         $('#edit_qty').val(qty);
-        $('#edit_is_percentage').val(is_percentage);
+        $('#edit_is_percentage').val(is_percentage); // Atur nilai is_percentage
         $('#edit_amount').val(amount);
         $('#edit_expired_date').val(expired_date);
-        $('#edit_settings_id').val(settings_id);
+        $('#edit_settings_id').val(settings_id); // Atur nilai settings_id
     }
 </script>
 
